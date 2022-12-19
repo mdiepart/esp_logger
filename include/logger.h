@@ -24,12 +24,12 @@ public:
   void setSyslogServer(IPAddress ip, unsigned int port, const String &hostname);
 
   void __attribute__((format(printf, 4, 5))) log(LoggerLevel level, const String &module, const char *fmt, ...);
+  void vlogf(LoggerLevel level, const String &module, const char *fmt, va_list args);
 
 private:
   Stream *    _serial;
   LoggerLevel _level;
 
-  void vlogf(LoggerLevel level, const String &module, const char *fmt, va_list args);
   void println(LoggerLevel level, const String &module, const String &text);
   void printHeader(LoggerLevel level, const String &module);
 
