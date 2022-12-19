@@ -1,7 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
     "name": "esp-logger-ng",
-    "version": "1.0.3",
+    "version": "1.1.0",
     "description": "Modern serial and syslogger for ESP devices.",
     "keywords": "communication, logger, serial",
     "authors":
@@ -34,7 +34,8 @@
     "export": {
         "exclude":
         [   
-            ".clang-format"
+            ".clang-format",
+            "*.tar.gz"
         ]
     }
 }
