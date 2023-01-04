@@ -6,10 +6,6 @@
 
 #include "logger_level.h"
 
-#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_SERIAL)
-extern logging::Logger logger;
-#endif
-
 namespace logging {
 
 class Logger {
@@ -54,5 +50,9 @@ private:
   void syslogLog(LoggerLevel level, const String &module, const String &text);
 };
 } // namespace logging
+
+#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_LOGGER)
+extern logging::Logger logger;
+#endif
 
 #endif

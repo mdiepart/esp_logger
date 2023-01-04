@@ -1,7 +1,7 @@
 #include "logger.h"
 #include <Arduino.h>
 
-#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_SERIAL)
+#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_LOGGER)
 logging::Logger logger;
 #endif
 
