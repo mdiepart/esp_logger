@@ -27,11 +27,17 @@ public:
   void setSyslogServer(const String &server, unsigned int port, const String &hostname);
   void setSyslogServer(IPAddress ip, unsigned int port, const String &hostname);
 
+  // Serial logging
+  void __attribute__((format(printf, 3, 4))) info(String name, const char *fmt, ...);
+  void __attribute__((format(printf, 3, 4))) debug(String name, const char *fmt, ...);
+  void __attribute__((format(printf, 3, 4))) error(String name, const char *fmt, ...);
+  void __attribute__((format(printf, 3, 4))) warn(String name, const char *fmt, ...);
+
   void __attribute__((format(printf, 4, 5))) log(LoggerLevel level, const String &module, const char *fmt, ...);
   void vlogf(LoggerLevel level, const String &module, const char *fmt, va_list args);
 
 private:
-  Stream *    _serial;
+  Stream     *_serial;
   LoggerLevel _level;
 
   void println(LoggerLevel level, const String &module, const String &text);

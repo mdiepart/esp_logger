@@ -6,13 +6,14 @@ logging::Logger logger;
 #endif
 
 namespace logging {
-Logger::Logger() : _serial(&Serial), _level(LoggerLevel::LOGGER_LEVEL_DEBUG), _isSyslogSet(false) {
+
+Logger::Logger() : _serial(&Serial), _level(LoggerLevel::LOG_DEBUG), _isSyslogSet(false) {
 }
 
 Logger::Logger(LoggerLevel level) : _serial(&Serial), _level(level), _isSyslogSet(false) {
 }
 
-Logger::Logger(Stream *serial) : _serial(serial), _level(LoggerLevel::LOGGER_LEVEL_DEBUG), _isSyslogSet(false) {
+Logger::Logger(Stream *serial) : _serial(serial), _level(LoggerLevel::LOG_DEBUG), _isSyslogSet(false) {
 }
 
 Logger::Logger(Stream *serial, LoggerLevel level) : _serial(serial), _level(level), _isSyslogSet(false) {
@@ -56,7 +57,7 @@ void Logger::log(LoggerLevel level, const String &module, const char *fmt, ...) 
 
 void Logger::vlogf(LoggerLevel level, const String &module, const char *fmt, va_list args) {
   size_t initialLen = strlen(fmt);
-  char * message    = new char[initialLen + 1];
+  char  *message    = new char[initialLen + 1];
   size_t len        = vsnprintf(message, initialLen + 1, fmt, args);
   if (len > initialLen) {
     delete[] message;
@@ -112,4 +113,33 @@ void Logger::syslogLog(LoggerLevel level, const String &module, const String &te
   _syslogUdp.print(text);
   _syslogUdp.endPacket();
 }
+
+void Logger::debug(String name, const char *fmt, ...) {
+  va_list args;
+  va_start(args, fmt);
+  vlogf(logging::LoggerLevel::LOG_DEBUG, name, fmt, args);
+  va_end(args);
+}
+
+void Logger::info(String name, const char *fmt, ...) {
+  va_list args;
+  va_start(args, fmt);
+  vlogf(logging::LoggerLevel::LOG_INFO, name, fmt, args);
+  va_end(args);
+}
+
+void Logger::error(String name, const char *fmt, ...) {
+  va_list args;
+  va_start(args, fmt);
+  vlogf(logging::LoggerLevel::LOG_ERROR, name, fmt, args);
+  va_end(args);
+}
+
+void Logger::warn(String name, const char *fmt, ...) {
+  va_list args;
+  va_start(args, fmt);
+  vlogf(logging::LoggerLevel::LOG_WARN, name, fmt, args);
+  va_end(args);
+}
+
 } // namespace logging

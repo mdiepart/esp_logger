@@ -29,12 +29,11 @@ namespace logging {
 
 class LoggerLevel {
 public:
-  enum Value : uint8_t
-  {
-    LOGGER_LEVEL_ERROR = 3, // Critical errors
-    LOGGER_LEVEL_WARN  = 4, // Error conditions but not critical
-    LOGGER_LEVEL_INFO  = 6, // Information messages
-    LOGGER_LEVEL_DEBUG = 7, // Extra information - default level (if not changed)
+  enum Value : uint8_t {
+    LOG_ERROR = 3, // Critical errors
+    LOG_WARN  = 4, // Error conditions but not critical
+    LOG_INFO  = 6, // Information messages
+    LOG_DEBUG = 7, // Extra information - default level (if not changed)
   };
 
   LoggerLevel() = default;
@@ -53,13 +52,13 @@ public:
 
   String toString() const {
     switch (_value) {
-    case LOGGER_LEVEL_ERROR:
+    case LOG_ERROR:
       return "ERROR";
-    case LOGGER_LEVEL_WARN:
+    case LOG_WARN:
       return "WARN";
-    case LOGGER_LEVEL_INFO:
+    case LOG_INFO:
       return "INFO";
-    case LOGGER_LEVEL_DEBUG:
+    case LOG_DEBUG:
       return "DEBUG";
     default:
       return "";
@@ -68,13 +67,13 @@ public:
 
   String getLineColor() const {
     switch (_value) {
-    case LOGGER_LEVEL_ERROR:
+    case LOG_ERROR:
       return LOG_COLOR_E;
-    case LOGGER_LEVEL_WARN:
+    case LOG_WARN:
       return LOG_COLOR_W;
-    case LOGGER_LEVEL_INFO:
+    case LOG_INFO:
       return LOG_COLOR_I;
-    case LOGGER_LEVEL_DEBUG:
+    case LOG_DEBUG:
       return LOG_COLOR_D;
     default:
       return "";
