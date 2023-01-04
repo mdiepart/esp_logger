@@ -1,4 +1,9 @@
 #include "logger.h"
+#include <Arduino.h>
+
+#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_SERIAL)
+logging::Logger logger;
+#endif
 
 namespace logging {
 Logger::Logger() : _serial(&Serial), _level(LoggerLevel::LOGGER_LEVEL_DEBUG), _isSyslogSet(false) {

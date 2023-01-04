@@ -6,6 +6,10 @@
 
 #include "logger_level.h"
 
+#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_SERIAL)
+extern logging::Logger logger;
+#endif
+
 namespace logging {
 
 class Logger {
